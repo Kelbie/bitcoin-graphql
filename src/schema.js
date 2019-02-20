@@ -6,12 +6,18 @@ var {
 var { resolvers } = require('./resolvers');
 
 const typeDefs = `
-  type Address {
-    hash: String!
+  type Transaction {
+    txid: String!,
+    version: Int!,
+    size: Int!,
+    vsize: Int!,
+    weight: Int!
+    locktime: Int!,
+    time: Int!
   }
 
   type Query {
-    address(hash: String!): Address!
+    transaction(txid: String!): Transaction!
   }
 `;
 

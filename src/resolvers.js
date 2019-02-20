@@ -1,10 +1,23 @@
+var async = require('async')
+
+var transaction = require("./models/transaction")
+
 module.exports = {
   resolvers: {
     Query: {
-      address: (root, { hash }) => {
+      transaction: async (root, { txid }) => {
+        var data = await transaction.transaction(txid);
+        data = JSON.parse(data).result
+
         return {
-          hash
-        };
+          txid: data.txid,
+          version: data.version,
+          size: data.size,
+          vsize: data.vsize,
+          weight: data.weight,
+          locktime: data.locktime, 
+          time: data.time
+        }
       },
     }
   }
