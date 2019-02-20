@@ -1,1 +1,1 @@
-# graphql-bitcoin
+graphql-bitcoin

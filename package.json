@@ -1,0 +1,24 @@
+{
+  "name": "graphql-bitcoin",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.0",
+    "cors": "^2.8.3",
+    "graphql": "^0.10.1",
+    "graphql-server-core": "^0.8.2",
+    "graphql-server-express": "^0.8.2",
+    "graphql-server-module-graphiql": "^0.8.2",
+    "graphql-subscriptions": "^0.4.3",
+    "graphql-tools": "^1.0.0"
+  }
+}
