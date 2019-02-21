@@ -41,7 +41,7 @@ const typeDefs = `
     chainwork: String!,
     previous_block_hash: String!,
     next_block_hash: String!,
-    transactions: [Transaction]
+    transactions(coinbaseOnly: Boolean): [Transaction]
   }
 
   type Blockchain {

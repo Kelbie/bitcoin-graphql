@@ -6,6 +6,21 @@ var blockchain = require("./models/blockchain");
 
 module.exports = {
   resolvers: {
+    Block: {
+      transactions: async (root, args, context, info) => {
+        if (args.coinbaseOnly == true) {
+          for (i = 0; i < root.transactions.length; i++) {
+            for (j = 0; j < root.transactions[i].vins.length; j++) {
+              if (root.transactions[i].vins[j].coinbase == null) {
+                delete root.transactions[i]
+                break;
+              }
+            }
+          }
+        }
+        return root.transactions;
+      }
+    },
     Vout: {
       value: async (root, args, context, info) => {
         if (args.min >= root.value) {
