@@ -12,7 +12,7 @@ const typeDefs = `
   }
 
   type Vout {
-    value: Float!
+    value(min: Float, max: Float): Float
   }
 
   type Transaction {
@@ -24,7 +24,7 @@ const typeDefs = `
     locktime: Int!,
     time: Int!,
     vins: [Vin!],
-    vouts: [Vout!]
+    vouts: [Vout]
   }
 
   type Block {

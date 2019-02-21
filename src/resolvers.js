@@ -6,6 +6,17 @@ var blockchain = require("./models/blockchain");
 
 module.exports = {
   resolvers: {
+    Vout: {
+      value: async (root, args, context, info) => {
+        if (args.min >= root.value) {
+          root.value = null;
+        }
+        if (root.value >= args.max) {
+          root.value = null;
+        }
+        return root.value;
+      }
+    },
     Query: {
       transaction: async (root, { txid }) => {
         var data = await transaction.getTransaction(txid);
@@ -52,9 +63,9 @@ module.exports = {
         }
       },
       blockchain: async (obj, args, context, info) => {
+        console.log(obj, args, context, info)
         var data = await blockchain.getBlockchainInfo();
         
-
         var blocks = await blockchain.getBlocks(args.offset, args.limit);
 
         return {
