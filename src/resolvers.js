@@ -32,6 +32,12 @@ module.exports = {
         return root.value;
       }
     },
+    Blockchain: {
+      blocks: async (root, args, context, info) => {
+        var blocks = await blockchain.getBlocks(args.offset, args.limit);
+        return blocks;
+      }
+    },
     Query: {
       transaction: async (root, { txid }) => {
         var data = await transaction.getTransaction(txid);
@@ -78,17 +84,13 @@ module.exports = {
         }
       },
       blockchain: async (obj, args, context, info) => {
-        console.log(obj, args, context, info)
         var data = await blockchain.getBlockchainInfo();
-        
-        var blocks = await blockchain.getBlocks(args.offset, args.limit);
 
         return {
           chain: data.chain,
           difficulty: data.difficulty,
           mediantime: data.mediantime,
-          chainwork: data.chainwork,
-          blocks: [...blocks]
+          chainwork: data.chainwork
         }
       }
     }
