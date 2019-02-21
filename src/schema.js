@@ -33,7 +33,7 @@ const typeDefs = `
 
   type Query {
     transaction(txid: String!): Transaction!,
-    block(hash: String!): Block
+    block(height: Int, hash: String): Block
   }
 `;
 

@@ -21,8 +21,14 @@ module.exports = {
         }
       },
       block: async (obj, args, context, info) => {
-        var data = await block.block(args.hash);
-        data = JSON.parse(data).result
+        var data;
+        if (args.hash != null) {
+          data = await block.getBlockByHash(args.hash);
+          data = JSON.parse(data).result
+        } else if (args.height != null) {
+          data = await block.getBlockByHeight(args.height);
+          data = JSON.parse(data).result
+        }
 
         var transactions = [];
         for (i = 0; i < data.tx.length; i++) {
