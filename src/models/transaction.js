@@ -20,6 +20,9 @@ module.exports = {
     var data = await request(options);
     data = JSON.parse(data).result;
 
+    data.vins = data.vin;
+    data.vouts = data.vout;
+
     return data;
   }
 };
