@@ -6,6 +6,15 @@ var {
 var { resolvers } = require('./resolvers');
 
 const typeDefs = `
+  type Vin {
+    coinbase: String!,
+    sequence: Int!
+  }
+
+  type Vout {
+    value: Float!
+  }
+
   type Transaction {
     txid: String!,
     version: Int!,
@@ -13,7 +22,9 @@ const typeDefs = `
     vsize: Int!,
     weight: Int!
     locktime: Int!,
-    time: Int!
+    time: Int!,
+    vins: [Vin!],
+    vouts: [Vout!]
   }
 
   type Block {

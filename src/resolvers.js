@@ -17,7 +17,9 @@ module.exports = {
           vsize: data.vsize,
           weight: data.weight,
           locktime: data.locktime, 
-          time: data.time
+          time: data.time,
+          vouts: data.vout,
+          vins: data.vin
         }
       },
       block: async (obj, args, context, info) => {
