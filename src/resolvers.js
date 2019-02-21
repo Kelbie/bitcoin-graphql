@@ -35,8 +35,8 @@ module.exports = {
     Transaction: {
       vouts: async (root, args, context, info) => {
         for (i = 0; i < root.vouts.length; i++) {
-          if (args.minValue >= root.vouts[0].value) {
-            delete root.vouts[0];
+          if (args.minValue >= root.vouts[i].value) {
+            delete root.vouts[i];
           }
         }
         return root.vouts;
