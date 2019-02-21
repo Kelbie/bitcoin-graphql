@@ -52,7 +52,8 @@ module.exports = {
       blocks.push(data);
     }
 
-    for (i = offset; i < offset + limit - 1; i++) {
+    var j = offset;
+    while (j + limit - 1 > blocks.length) {
       var data = await block.getBlockByHash(data.nextblockhash);
       if (minWeight(min_weight, data.weight) && maxWeight(max_weight, data.weight)) {
         var transactions = [];
