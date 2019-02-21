@@ -14,48 +14,48 @@ const typeDefs = `
   }
 
   type Vout {
-    value(min: Float, max: Float): Float
+    value: Float
   }
 
   type Transaction {
-    txid: String!,
-    version: Int!,
-    size: Int!,
-    vsize: Int!,
-    weight: Int!
-    locktime: Int!,
-    time: Int!,
+    txid: String,
+    version: Int,
+    size: Int,
+    vsize: Int,
+    weight: Int
+    locktime: Int,
+    time: Int,
     vins: [Vin],
-    vouts: [Vout]
+    vouts(minValue: Float, maxValue: Float): [Vout]
   }
 
   type Block {
-    hash: String!,
-    version: Int!,
-    height: Int!,
-    weight: Int!,
-    merkleroot: String!,
+    hash: String,
+    version: Int,
+    height: Int,
+    weight: Int,
+    merkleroot: String,
     time: Int,
-    nonce: Float!,
-    difficulty: Float!,
-    chainwork: String!,
-    previous_block_hash: String!,
-    next_block_hash: String!,
+    nonce: Float,
+    difficulty: Float,
+    chainwork: String,
+    previous_block_hash: String,
+    next_block_hash: String,
     transactions(coinbaseOnly: Boolean): [Transaction]
   }
 
   type Blockchain {
-    chain: String!,
-    difficulty: Float!,
-    mediantime: Float!,
-    chainwork: String!,
-    blocks(offset: Int!, limit: Int!): [Block!]
+    chain: String,
+    difficulty: Float,
+    mediantime: Float,
+    chainwork: String,
+    blocks(offset: Int!, limit: Int!): [Block]
   }
 
   type Query {
-    transaction(txid: String!): Transaction!,
+    transaction(txid: String): Transaction,
     block(height: Int, hash: String): Block,
-    blockchain: Blockchain!
+    blockchain: Blockchain
   }
 `;
 

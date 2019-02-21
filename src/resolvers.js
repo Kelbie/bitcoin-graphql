@@ -23,12 +23,6 @@ module.exports = {
     },
     Vout: {
       value: async (root, args, context, info) => {
-        if (args.min >= root.value) {
-          root.value = null;
-        }
-        if (root.value >= args.max) {
-          root.value = null;
-        }
         return root.value;
       }
     },
@@ -36,6 +30,16 @@ module.exports = {
       blocks: async (root, args, context, info) => {
         var blocks = await blockchain.getBlocks(args.offset, args.limit);
         return blocks;
+      }
+    },
+    Transaction: {
+      vouts: async (root, args, context, info) => {
+        for (i = 0; i < root.vouts.length; i++) {
+          if (args.minValue >= root.vouts[0].value) {
+            delete root.vouts[0];
+          }
+        }
+        return root.vouts;
       }
     },
     Query: {
