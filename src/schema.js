@@ -8,7 +8,7 @@ var { resolvers } = require('./resolvers');
 const typeDefs = `
   type Vin {
     coinbase: String!,
-    sequence: Int!
+    sequence: Float!
   }
 
   type Vout {
