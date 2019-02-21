@@ -8,8 +8,7 @@ module.exports = {
   resolvers: {
     Query: {
       transaction: async (root, { txid }) => {
-        var data = await transaction.transaction(txid);
-        data = JSON.parse(data).result;
+        var data = await transaction.getTransaction(txid);
 
         return {
           txid: data.txid,
@@ -25,16 +24,14 @@ module.exports = {
         var data;
         if (args.hash != null) {
           data = await block.getBlockByHash(args.hash);
-          data = JSON.parse(data).result;
         } else if (args.height != null) {
           data = await block.getBlockByHeight(args.height);
-          data = JSON.parse(data).result;
         }
 
         var transactions = [];
         for (i = 0; i < data.tx.length; i++) {
-          var tx_data = await transaction.transaction(data.tx[i]);
-          transactions.push(JSON.parse(tx_data).result);
+          var tx_data = await transaction.getTransaction(data.tx[i]);
+          transactions.push(tx_data);
         }
 
         return {
@@ -54,7 +51,7 @@ module.exports = {
       },
       blockchain: async (obj, args, context, info) => {
         var data = await blockchain.getBlockchainInfo();
-        data = JSON.parse(data).result;
+        
 
         var blocks = await blockchain.getBlocks(args.offset, args.limit);
 

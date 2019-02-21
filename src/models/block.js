@@ -14,7 +14,10 @@ module.exports = {
       })
     };
 
-    return await request(options);
+    var data = await request(options);
+    data = JSON.parse(data).result
+
+    return data;
   },
   getBlockByHeight: async (height) => {
     var options = {
@@ -28,7 +31,7 @@ module.exports = {
       })
     };
 
-    const data = await request(options);
+    var data = await request(options);
     var hash = JSON.parse(data).result;
 
     var options = {
@@ -42,6 +45,9 @@ module.exports = {
       })
     };
 
-    return await request(options);
+    data = await request(options);
+    data = JSON.parse(data).result
+
+    return data;
   }
 };

@@ -17,17 +17,18 @@ module.exports = {
       })
     };
 
-    return await request(options);
+    var data = await request(options);
+    data = JSON.parse(data).result;
+
+    return data;
   },
   getBlocks: async (offset, limit) => {
     var blocks = [];
 
     var data = await block.getBlockByHeight(offset);
-    data = JSON.parse(data).result;
     var transactions = [];
     for (i = 0; i < data.tx.length; i++) {
-      var tx = await transaction.transaction(data.tx[i]);
-      tx = JSON.parse(tx).result;
+      var tx = await transaction.getTransaction(data.tx[i]);
       transactions.push(tx);
     }
     data.transactions = transactions;
@@ -35,11 +36,9 @@ module.exports = {
 
     for (i = offset; i < offset + limit - 1; i++) {
       var data = await block.getBlockByHash(data.nextblockhash);
-      data = JSON.parse(data).result;
       var transactions = [];
       for (j = 0; j < data.tx.length; j++) {
-        var tx = await transaction.transaction(data.tx[j]);
-        tx = JSON.parse(tx).result;
+        var tx = await transaction.getTransaction(data.tx[j]);
         transactions.push(tx);
       }
       data.transactions = transactions;

@@ -2,7 +2,7 @@ var request = require("request-promise");
 var async = require("async");
 
 module.exports = {
-  transaction: async (txid) => {
+  getTransaction: async (txid) => {
     var options = {
       url: "http://user:pass@127.0.0.1:18332",
       method: "POST",
@@ -17,6 +17,9 @@ module.exports = {
       })
     };
 
-    return await request(options);
+    var data = await request(options);
+    data = JSON.parse(data).result;
+
+    return data;
   }
 };
