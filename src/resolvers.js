@@ -1,6 +1,7 @@
 var async = require('async')
 
 var transaction = require("./models/transaction")
+var block = require("./models/block")
 
 module.exports = {
   resolvers: {
@@ -19,6 +20,31 @@ module.exports = {
           time: data.time
         }
       },
+      block: async (obj, args, context, info) => {
+        var data = await block.block(args.hash);
+        data = JSON.parse(data).result
+
+        var transactions = [];
+        for (i = 0; i < data.tx.length; i++) {
+          var tx_data = await transaction.transaction(data.tx[i])
+          transactions.push(JSON.parse(tx_data).result)
+        }
+
+        return {
+          hash: data.hash,
+          version: data.version,
+          height: data.height,
+          weight: data.weight,
+          merkleroot: data.merkleroot,
+          nonce: data.nonce, 
+          difficulty: data.difficulty,
+          chainwork: data.chainwork,
+          time: data.time,
+          previous_block_hash: data.previousblockhash,
+          next_block_hash: data.nextblockhash,
+          transactions: [...transactions]
+        }
+      }
     }
   }
 };

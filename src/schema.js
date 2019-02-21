@@ -16,8 +16,24 @@ const typeDefs = `
     time: Int!
   }
 
+  type Block {
+    hash: String!,
+    version: Int!,
+    height: Int!,
+    weight: Int!,
+    merkleroot: String!,
+    time: Int,
+    nonce: Float!,
+    difficulty: Float!,
+    chainwork: String!,
+    previous_block_hash: String!,
+    next_block_hash: String!,
+    transactions: [Transaction]
+  }
+
   type Query {
-    transaction(txid: String!): Transaction!
+    transaction(txid: String!): Transaction!,
+    block(hash: String!): Block
   }
 `;
 
