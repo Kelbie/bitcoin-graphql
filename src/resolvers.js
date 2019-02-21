@@ -28,7 +28,8 @@ module.exports = {
     },
     Blockchain: {
       blocks: async (root, args, context, info) => {
-        var blocks = await blockchain.getBlocks(args.offset, args.limit);
+        var blocks = await blockchain.getBlocks(args.offset, args.limit, args.min_weight, args.max_weight);
+
         return blocks;
       }
     },

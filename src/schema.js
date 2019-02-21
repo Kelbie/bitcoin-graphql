@@ -49,7 +49,7 @@ const typeDefs = `
     difficulty: Float,
     mediantime: Float,
     chainwork: String,
-    blocks(offset: Int!, limit: Int!): [Block]
+    blocks(offset: Int!, limit: Int!, min_weight: Int, max_weight: Int): [Block]
   }
 
   type Query {
