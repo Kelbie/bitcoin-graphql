@@ -56,11 +56,14 @@ module.exports = {
         var data = await blockchain.getBlockchainInfo();
         data = JSON.parse(data).result;
 
+        var blocks = await blockchain.getBlocks(args.offset, args.limit);
+
         return {
           chain: data.chain,
           difficulty: data.difficulty,
           mediantime: data.mediantime,
-          chainwork: data.chainwork
+          chainwork: data.chainwork,
+          blocks: [...blocks]
         }
       }
     }

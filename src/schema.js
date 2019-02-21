@@ -36,12 +36,13 @@ const typeDefs = `
     difficulty: Float!,
     mediantime: Float!,
     chainwork: String!,
+    blocks: [Block!]
   }
 
   type Query {
     transaction(txid: String!): Transaction!,
     block(height: Int, hash: String): Block,
-    blockchain: Blockchain!
+    blockchain(offset: Int!, limit: Int!): Blockchain!
   }
 `;
 
