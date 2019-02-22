@@ -24,18 +24,26 @@ module.exports = {
   },
   getBlocks: async (start_height, limit, min_weight, max_weight) => {
     function minWeight(min, actual) {
-      if (min <= actual) {
-        return true;
+      if (min != null) {
+        if (min <= actual) {
+          return true;
+        } else {
+          return false;
+        }
       } else {
-        return false;
+        return true;
       }
     }
 
     function maxWeight(max, actual) {
-      if (max >= actual) {
-        return true;
+      if (max != null) {
+        if (max >= actual) {
+          return true;
+        } else {
+          return false;
+        }
       } else {
-        return false;
+        return true;
       }
     }
     
