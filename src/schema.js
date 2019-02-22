@@ -6,6 +6,17 @@ var {
 var { resolvers } = require('./resolvers');
 
 const typeDefs = `
+  type Address {
+    address: String
+  }
+
+  type ScriptPubKey {
+    asm: String,
+    reqSigs: Int,
+    type: String,
+    addresses: [Address]
+  }
+
   type Vin {
     txid: String,
     vout: Int,
@@ -14,7 +25,9 @@ const typeDefs = `
   }
 
   type Vout {
-    value: Float
+    value: Float,
+    n: Int,
+    scriptPubKey: ScriptPubKey
   }
 
   type Transaction {

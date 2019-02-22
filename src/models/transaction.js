@@ -51,7 +51,17 @@ module.exports = {
   
       data.vins = data.vin;
       data.vouts = data.vout;
-  
+
+      var addresses = [];
+      for (i = 0; i < data.vouts.length; i++) {
+        for (j = 0; j < data.vouts[i].scriptPubKey.addresses.length; j++) {
+          if (data.vouts[i].scriptPubKey.addresses.length > 1) {
+            console.log(data.vouts[i].scriptPubKey.addresses.length)
+          }
+          data.vouts[i].scriptPubKey.addresses[j] = { address: data.vouts[i].scriptPubKey.addresses[j] };
+        }
+      }
+
       return data;
     }
 

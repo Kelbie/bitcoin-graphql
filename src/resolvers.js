@@ -21,11 +21,6 @@ module.exports = {
         return root.transactions;
       }
     },
-    Vout: {
-      value: async (root, args, context, info) => {
-        return root.value;
-      }
-    },
     Blockchain: {
       blocks: async (root, args, context, info) => {
         console.log(args)
