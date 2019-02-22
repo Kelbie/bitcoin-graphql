@@ -18,7 +18,7 @@ const typeDefs = `
   }
 
   type Vin {
-    txid: String,
+    transaction: Transaction,
     vout: Int,
     coinbase: String,
     sequence: Float

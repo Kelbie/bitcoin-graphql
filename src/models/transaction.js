@@ -50,6 +50,12 @@ module.exports = {
       data = JSON.parse(data).result;
   
       data.vins = data.vin;
+      for (i = 0; i < data.vins.length; i++) {
+        data.vins[i].transaction = {
+          txid: data.vins[i].txid
+        }
+      }
+
       data.vouts = data.vout;
 
       var addresses = [];
