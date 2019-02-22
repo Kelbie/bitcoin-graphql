@@ -22,7 +22,7 @@ module.exports = {
 
     return data;
   },
-  getBlocks: async (offset, limit, min_weight, max_weight) => {
+  getBlocks: async (start_height, limit, min_weight, max_weight) => {
     function minWeight(min, actual) {
       if (min <= actual) {
         return true;
@@ -41,7 +41,7 @@ module.exports = {
     
     var blocks = [];
 
-    var data = await block.getBlockByHeight(offset);
+    var data = await block.getBlockByHeight(start_height);
     if (minWeight(min_weight, data.weight) && maxWeight(max_weight, data.weight)) {
       var transactions = [];
       for (i = 0; i < data.tx.length; i++) {
@@ -52,7 +52,7 @@ module.exports = {
       blocks.push(data);
     }
 
-    var j = offset;
+    var j = start_height;
     while (j + limit - 1 > blocks.length) {
       var data = await block.getBlockByHash(data.nextblockhash);
       if (minWeight(min_weight, data.weight) && maxWeight(max_weight, data.weight)) {
