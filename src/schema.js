@@ -7,7 +7,10 @@ var { resolvers } = require('./resolvers');
 
 const typeDefs = `
   type Address {
-    address: String
+    address: String,
+    transactions: [Transaction],
+    received: Float,
+    balance: Float
   }
 
   type ScriptPubKey {
