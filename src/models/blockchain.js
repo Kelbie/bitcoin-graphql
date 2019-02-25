@@ -23,6 +23,10 @@ module.exports = {
     return data;
   },
   getBlocks: async (start_height, limit, min_weight, max_weight) => {
+    if (limit <= 0) {
+      throw new Error('`limit` argument must be a positive integer');
+    }
+
     function minWeight(min, actual) {
       if (min != null) {
         if (min <= actual) {
@@ -61,7 +65,7 @@ module.exports = {
     }
 
     var j = start_height;
-    while (j + limit - 1 > blocks.length) {
+    while (limit > blocks.length) {
       var data = await block.getBlockByHash(data.nextblockhash);
       if (minWeight(min_weight, data.weight) && maxWeight(max_weight, data.weight)) {
         var transactions = [];
