@@ -23,8 +23,17 @@ module.exports = {
     return data;
   },
   getBlocks: async (start_height, limit, min_weight, max_weight) => {
+    if (start_height < 0) {
+      throw new Error('`start_height` cannot be negative')
+    }
     if (limit <= 0) {
       throw new Error('`limit` argument must be a positive integer');
+    }
+    if (min_weight < 0) {
+      throw new Error('`min_weight` cannot be negative')
+    }
+    if (max_weight < 0) {
+      throw new Error('`max_weight` cannot be negative')
     }
 
     function minWeight(min, actual) {
