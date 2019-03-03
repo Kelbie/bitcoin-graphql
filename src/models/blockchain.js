@@ -60,26 +60,25 @@ module.exports = {
       }
     }
     
-    var blocks = [];
 
+    var blocks = [];
     var data = await block.getBlockByHeight(start_height);
     if (minWeight(min_weight, data.weight) && maxWeight(max_weight, data.weight)) {
       var transactions = [];
-      for (i = 0; i < data.tx.length; i++) {
-        var tx = await transaction.getTransaction(data.tx[i]);
+      for (let txid of data.tx) {
+        var tx = await transaction.getTransaction(txid);
         transactions.push(tx);
       }
       data.transactions = transactions;
       blocks.push(data);
     }
-
     var j = start_height;
     while (limit > blocks.length) {
       var data = await block.getBlockByHash(data.nextblockhash);
       if (minWeight(min_weight, data.weight) && maxWeight(max_weight, data.weight)) {
         var transactions = [];
-        for (j = 0; j < data.tx.length; j++) {
-          var tx = await transaction.getTransaction(data.tx[j]);
+        for (let txid of data.tx) {
+          var tx = await transaction.getTransaction(txid);
           transactions.push(tx);
         }
         data.transactions = transactions;
