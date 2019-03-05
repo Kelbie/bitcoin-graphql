@@ -55,6 +55,24 @@ module.exports = {
           }
         }
         return root.vouts;
+      },
+      vins: async (root, args, context, info) => {
+        /* TODO: Better than defining a new array it would be better to mutate the original
+         * but it kept throwing errors for some reason
+         */
+        let vins = [];
+        for (i = 0; i < root.vins.length; i++) {
+          if (root.vins[i].txid) {
+            transactionVin = await transaction.getTransaction(
+              root.vins[i].txid
+            );
+            vins.push(transactionVin);
+          } else if (root.vins[i].coinbase) {
+            vins.push(root.vins[i]);
+          }
+        }
+
+        return vins;
       }
     },
     Query: {
