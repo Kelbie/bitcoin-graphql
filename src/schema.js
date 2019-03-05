@@ -20,12 +20,12 @@ const typeDefs = `
     addresses: [Address]
   }
 
-  type Vin {
-    transaction: Transaction,
-    vout: Int,
+  type Coinbase {
     coinbase: String,
     sequence: Float
   }
+
+  union TransactionOrCoinbase = Transaction | Coinbase
 
   type Vout {
     value: Float,
@@ -41,7 +41,7 @@ const typeDefs = `
     weight: Int
     locktime: Int,
     time: Int,
-    vins: [Vin],
+    vins: [TransactionOrCoinbase],
     vouts(minValue: Float, maxValue: Float): [Vout]
   }
 

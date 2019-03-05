@@ -1,4 +1,4 @@
-var async = require('async');
+var async = require("async");
 
 var transaction = require("./models/transaction");
 var block = require("./models/block");
@@ -6,13 +6,27 @@ var blockchain = require("./models/blockchain");
 
 module.exports = {
   resolvers: {
+    TransactionOrCoinbase: {
+      __resolveType(obj, context, info) {
+        console.log(obj);
+        if (obj.coinbase) {
+          return "Coinbase";
+        }
+
+        if (obj.txid) {
+          return "Transaction";
+        }
+
+        return null;
+      }
+    },
     Block: {
       transactions: async (root, args, context, info) => {
         if (args.coinbaseOnly == true) {
           for (i = 0; i < root.transactions.length; i++) {
             for (j = 0; j < root.transactions[i].vins.length; j++) {
               if (root.transactions[i].vins[j].coinbase == null) {
-                delete root.transactions[i]
+                delete root.transactions[i];
                 break;
               }
             }
@@ -23,7 +37,12 @@ module.exports = {
     },
     Blockchain: {
       blocks: async (root, args, context, info) => {
-        var blocks = await blockchain.getBlocks(args.start_height, args.limit, args.min_weight, args.max_weight);
+        var blocks = await blockchain.getBlocks(
+          args.start_height,
+          args.limit,
+          args.min_weight,
+          args.max_weight
+        );
 
         return blocks;
       }
@@ -48,11 +67,11 @@ module.exports = {
           size: data.size,
           vsize: data.vsize,
           weight: data.weight,
-          locktime: data.locktime, 
+          locktime: data.locktime,
           time: data.time,
           vouts: data.vouts,
           vins: data.vins
-        }
+        };
       },
       block: async (obj, args, context, info) => {
         var data;
@@ -74,14 +93,14 @@ module.exports = {
           height: data.height,
           weight: data.weight,
           merkleroot: data.merkleroot,
-          nonce: data.nonce, 
+          nonce: data.nonce,
           difficulty: data.difficulty,
           chainwork: data.chainwork,
           time: data.time,
           previous_block_hash: data.previousblockhash,
           next_block_hash: data.nextblockhash,
           transactions: [...transactions]
-        }
+        };
       },
       blockchain: async (obj, args, context, info) => {
         var data = await blockchain.getBlockchainInfo();
@@ -91,7 +110,7 @@ module.exports = {
           difficulty: data.difficulty,
           mediantime: data.mediantime,
           chainwork: data.chainwork
-        }
+        };
       }
     }
   }
