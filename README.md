@@ -2,7 +2,7 @@
 
 ## Examples
 
-1. Requesting Blocks and all Transactions:
+1. Requesting the first 10 blocks and all transactions:
 
 ![](Examples/1.png)
 
