@@ -13,3 +13,7 @@
 3. Requesting 5 blocks starting at block 50,000 that have a min_weight of 1000:
 
 [](Examples/3.png)
+
+4. Requesting transaction inputs and outputs of block 80,000
+
+[](Examples/4.png)
