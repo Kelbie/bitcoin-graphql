@@ -9,7 +9,7 @@ module.exports = {
       var hash = "000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f";
 
       var options = {
-        url: "http://user:pass@127.0.0.1:18332",
+        url: "http://user:pass@127.0.0.1:8332",
         method: "POST",
         body: JSON.stringify({
           jsonrpc: "1.0",
@@ -33,7 +33,7 @@ module.exports = {
     } else {
 
       var options = {
-        url: "http://user:pass@127.0.0.1:18332",
+        url: "http://user:pass@127.0.0.1:8332",
         method: "POST",
         body: JSON.stringify({
           jsonrpc: "1.0",
