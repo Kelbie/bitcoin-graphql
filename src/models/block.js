@@ -4,7 +4,7 @@ var async = require("async");
 module.exports = {
   getBlockByHash: async hash => {
     var options = {
-      url: "http://user:pass@127.0.0.1:8332",
+      url: process.env.URL,
       method: "POST",
       body: JSON.stringify({
         jsonrpc: "1.0",
@@ -21,7 +21,7 @@ module.exports = {
   },
   getBlockByHeight: async (height) => {
     var options = {
-      url: "http://user:pass@127.0.0.1:8332",
+      url: process.env.URL,
       method: "POST",
       body: JSON.stringify({
         jsonrpc: "1.0",
@@ -35,7 +35,7 @@ module.exports = {
     var hash = JSON.parse(data).result;
 
     var options = {
-      url: "http://user:pass@127.0.0.1:8332",
+      url: process.env.URL,
       method: "POST",
       body: JSON.stringify({
         jsonrpc: "1.0",

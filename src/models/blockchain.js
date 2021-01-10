@@ -7,7 +7,7 @@ var transaction = require("./transaction");
 module.exports = {
   getBlockchainInfo: async () => {
     var options = {
-      url: "http://user:pass@127.0.0.1:8332",
+      url: process.env.URL,
       method: "POST",
       body: JSON.stringify({
         jsonrpc: "1.0",
