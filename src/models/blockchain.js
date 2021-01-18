@@ -1,11 +1,13 @@
 var request = require("request-promise");
 var async = require("async");
+var Options = require('../utils/options');
 
 var block = require("./block");
 var transaction = require("./transaction");
 
 module.exports = {
   getBlockchainInfo: async () => {
+    /*
     var options = {
       url: process.env.URL,
       method: "POST",
@@ -15,10 +17,14 @@ module.exports = {
         method: "getblockchaininfo",
         params: []
       })
-    };
+    };*/
+
+    var options = Options("getblockchaininfo", []);
 
     var data = await request(options);
     data = JSON.parse(data).result;
+
+    console.log(data);
 
     return data;
   },
@@ -87,5 +93,22 @@ module.exports = {
     }
 
     return blocks;
+  },
+  getBestBlockHash: async () => {
+    var options = {
+      url: process.env.URL,
+      method: "POST",
+      body: JSON.stringify({
+        jsonrpc: "1.0",
+        id: "curltest",
+        method: "getbestblockhash",
+        params: []
+      })
+    };
+
+    var data = await request(options);
+    data = JSON.parse(data).result;
+
+    return data;
   }
 };
