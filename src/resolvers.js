@@ -129,6 +129,12 @@ module.exports = {
           mediantime: data.mediantime,
           chainwork: data.chainwork
         };
+      },
+      getBestBlockHash: async(obj, args, context, info) => {
+        let data = await blockchain.getBestBlockHash();
+        return {
+          hash: data
+        }
       }
     }
   }

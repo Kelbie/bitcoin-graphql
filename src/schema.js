@@ -71,7 +71,8 @@ const typeDefs = `
   type Query {
     transaction(txid: String): Transaction,
     block(height: Int, hash: String): Block,
-    blockchain: Blockchain
+    blockchain: Blockchain,
+    getBestBlockHash: Block
   }
 `;
 
