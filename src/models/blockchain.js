@@ -7,24 +7,10 @@ var transaction = require("./transaction");
 
 module.exports = {
   getBlockchainInfo: async () => {
-    /*
-    var options = {
-      url: process.env.URL,
-      method: "POST",
-      body: JSON.stringify({
-        jsonrpc: "1.0",
-        id: "curltest",
-        method: "getblockchaininfo",
-        params: []
-      })
-    };*/
-
     var options = Options("getblockchaininfo", []);
 
     var data = await request(options);
     data = JSON.parse(data).result;
-
-    console.log(data);
 
     return data;
   },
@@ -33,7 +19,7 @@ module.exports = {
       throw new Error('`start_height` cannot be negative')
     }
     if (limit <= 0) {
-      throw new Error('`limit` argument must be a positive integer');
+      throw new Error('`limit` argument must be a positive integer')
     }
     if (min_weight < 0) {
       throw new Error('`min_weight` cannot be negative')
@@ -95,6 +81,8 @@ module.exports = {
     return blocks;
   },
   getBestBlockHash: async () => {
+    var options = Options("getbestblockhash", []);
+    /*
     var options = {
       url: process.env.URL,
       method: "POST",
@@ -104,7 +92,7 @@ module.exports = {
         method: "getbestblockhash",
         params: []
       })
-    };
+    };*/
 
     var data = await request(options);
     data = JSON.parse(data).result;
