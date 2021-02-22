@@ -1,5 +1,4 @@
 var request = require("request-promise");
-var async = require("async");
 
 module.exports = {
   getTransaction: async (txid) => {
@@ -58,13 +57,11 @@ module.exports = {
 
       data.vouts = data.vout;
 
-      var addresses = [];
       for (i = 0; i < data.vouts.length; i++) {
-        for (j = 0; j < data.vouts[i].scriptPubKey.addresses.length; j++) {
-          if (data.vouts[i].scriptPubKey.addresses.length > 1) {
-            console.log(data.vouts[i].scriptPubKey.addresses.length)
+        if (typeof data.vouts[i].scriptPubKey.addresses !== 'undefined') {
+          for (j = 0; j < data.vouts[i].scriptPubKey.addresses.length; j++) {
+            data.vouts[i].scriptPubKey.addresses[j] = { address: data.vouts[i].scriptPubKey.addresses[j] };
           }
-          data.vouts[i].scriptPubKey.addresses[j] = { address: data.vouts[i].scriptPubKey.addresses[j] };
         }
       }
 
