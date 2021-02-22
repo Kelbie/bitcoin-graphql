@@ -8,7 +8,6 @@ module.exports = {
   resolvers: {
     TransactionOrCoinbase: {
       __resolveType(obj, context, info) {
-        console.log(obj);
         if (obj.coinbase) {
           return "Coinbase";
         }
