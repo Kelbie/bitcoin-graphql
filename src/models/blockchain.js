@@ -82,18 +82,7 @@ module.exports = {
   },
   getBestBlockHash: async () => {
     var options = Options("getbestblockhash", []);
-    /*
-    var options = {
-      url: process.env.URL,
-      method: "POST",
-      body: JSON.stringify({
-        jsonrpc: "1.0",
-        id: "curltest",
-        method: "getbestblockhash",
-        params: []
-      })
-    };*/
-
+    
     var data = await request(options);
     data = JSON.parse(data).result;
 
