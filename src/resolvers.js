@@ -8,7 +8,6 @@ module.exports = {
   resolvers: {
     TransactionOrCoinbase: {
       __resolveType(obj, context, info) {
-        console.log(obj);
         if (obj.coinbase) {
           return "Coinbase";
         }
@@ -129,6 +128,12 @@ module.exports = {
           mediantime: data.mediantime,
           chainwork: data.chainwork
         };
+      },
+      getBestBlockHash: async(obj, args, context, info) => {
+        let data = await blockchain.getBestBlockHash();
+        return {
+          hash: data
+        }
       }
     }
   }
